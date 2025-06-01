@@ -32,6 +32,7 @@ def named_entity_recognition(text):
     doc = nlp(text)
     return [(ent.text, ent.label_) for ent in doc.ents]
 
+# Custom CSS for background image and styling
 page_bg_img = '''
 <style>
 .stApp {
@@ -49,11 +50,11 @@ h1 {
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-st.markdown("<h1><span style='font-weight:bold;color:orange;'>Word cloud</span> Generator </h1>", unsafe_allow_html=True)
+st.markdown("<h1><span style='font-weight:bold;color:orange;'>Word Cloud</span> Generator</h1>", unsafe_allow_html=True)
 
 st.markdown("### Enter text below to generate a word cloud and perform NLP tasks.")
 
-input_text = st.text_area("Enter your text for word cloud and NER:", height=150)
+input_text = st.text_area("Enter your text for word cloud and NER:", height=150, placeholder="Type or paste your text here...")
 
 lemmatize_option = st.checkbox("Lemmatization for Word Cloud")
 stem_option = st.checkbox("Stemming for Word Cloud")
@@ -83,11 +84,13 @@ if st.button("Generate Word Cloud"):
                 st.write(f"{ent_text}: {ent_label}")
         else:
             st.write("No named entities found. Please try with different text.")
+    else:
+        st.warning("Please enter some text to generate a word cloud.")
 
 st.markdown("---")
 st.markdown("### Enter text to convert:")
 
-convert_text = st.text_area("Enter text to convert:", height=120)
+convert_text = st.text_area("Enter text to convert:", height=120, placeholder="Type or paste your text here...")
 
 convert_option = st.radio("Convert using:", ("Lemmatizer", "Stemmer"))
 
@@ -99,10 +102,11 @@ if st.button("Convert Text"):
             converted = process_text(convert_text, stem=True)
         st.subheader("Converted Text:")
         st.write(converted)
+    else:
+        st.warning("Please enter some text to convert.")
 
-# Sample text button
 if st.button("Use Sample Text for Word Cloud"):
-    sample_text = "Hey hi , I am Ratna  please  Add ur text"
+    sample_text = "Hey hi, I am Ratna. Please add your text."
     st.text_area("Enter your text for word cloud and NER:", value=sample_text, height=150)
 
-st.markdown("Made by ratnaprava")
+st.markdown("Made by Ratnaprava")
